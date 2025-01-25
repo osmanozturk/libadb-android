@@ -173,7 +173,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
      * @param context       Application context
      * @param timeoutMillis Amount of time spent in searching for a host and a port.
      * @return {@code true} if and only if the connection is successful. It returns {@code false} if the connection
-     * attempt is unsuccessful, or it has already been made.
+     * attempt is unsuccessful, returns true if it has already been made.
      * @throws IOException                      If the socket connection could not be made.
      * @throws InterruptedException             If timeout has reached.
      * @throws AdbAuthenticationFailedException If {@link #isThrowOnUnauthorised()} is set to {@code true}, and the ADB
@@ -195,7 +195,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
      * @param context       Application context
      * @param timeoutMillis Amount of time spent in searching for a host and a port.
      * @return {@code true} if and only if the connection is successful. It returns {@code false} if the connection
-     * attempt is unsuccessful, or it has already been made.
+     * attempt is unsuccessful, returns true if it has already been made.
      * @throws IOException                      If the socket connection could not be made.
      * @throws InterruptedException             If timeout has reached.
      * @throws AdbAuthenticationFailedException If {@link #isThrowOnUnauthorised()} is set to {@code true}, and the ADB
@@ -217,7 +217,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
      * @param context       Application context
      * @param timeoutMillis Amount of time spent in searching for a host and a port.
      * @return {@code true} if and only if the connection is successful. It returns {@code false} if the connection
-     * attempt is unsuccessful, or it has already been made.
+     * attempt is unsuccessful, returns true if it has already been made.
      * @throws IOException                      If the socket connection could not be made.
      * @throws InterruptedException             If timeout has reached.
      * @throws AdbAuthenticationFailedException If {@link #isThrowOnUnauthorised()} is set to {@code true}, and the ADB
@@ -326,7 +326,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
      *
      * @param port Port number
      * @return {@code true} if and only if the connection is successful. It returns {@code false} if the connection
-     * attempt is unsuccessful, or it has already been made.
+     * attempt is unsuccessful, returns true if it has already been made.
      * @throws IOException                      If the socket connection could not be made.
      * @throws InterruptedException             If timeout has reached.
      * @throws AdbAuthenticationFailedException If {@link #isThrowOnUnauthorised()} is set to {@code true}, and the ADB
@@ -338,7 +338,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
     public boolean connect(int port) throws IOException, InterruptedException, AdbPairingRequiredException {
         synchronized (mLock) {
             if (isConnected()) {
-                return false;
+                return true;
             }
             mAdbConnection = new AdbConnection.Builder(mHostAddress, port)
                     .setApi(mApi)
@@ -369,7 +369,7 @@ public abstract class AbsAdbConnectionManager implements Closeable {
             throws IOException, InterruptedException, AdbPairingRequiredException {
         synchronized (mLock) {
             if (isConnected()) {
-                return false;
+                return true;
             }
             mHostAddress = host;
             mAdbConnection = new AdbConnection.Builder(host, port)

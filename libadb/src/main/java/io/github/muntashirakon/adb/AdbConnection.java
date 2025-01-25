@@ -446,7 +446,7 @@ public class AdbConnection implements Closeable {
     public boolean connect(long timeout, @NonNull TimeUnit unit, boolean throwOnUnauthorised)
             throws IOException, InterruptedException, AdbAuthenticationFailedException, AdbPairingRequiredException {
         if (mConnectionEstablished) {
-            throw new IllegalStateException("Already connected");
+            return true;
         }
 
         // Send CONNECT
